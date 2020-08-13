@@ -1,0 +1,21 @@
+version: '2.3'
+
+networks:
+    netapp:
+
+services:
+    keystone:
+        build:
+            context: ./keystone
+            dockerfile: ./Dockerfile
+        networks:
+            - netapp
+
+    user:
+        build:
+            context: ./user
+            dockerfile: ./Dockerfile
+        networks:
+            - netapp
+        depends_on: 
+            - keystone
